@@ -97,7 +97,7 @@ module.exports = class ConnectionManager {
       console.log(`${user.letter} has joined the ${room} room`);
       console.log(
         `${players.length} user(s) in the ${room} room: ${players.map(
-          (player) => player.name
+          (player) => player.letter
         )}`
       );
     });
@@ -114,7 +114,7 @@ module.exports = class ConnectionManager {
       console.log(`${user.letter} left the ${room} room`);
       console.log(
         `${players.length} user(s) in the ${room} room: ${players.map(
-          (player) => player.name
+          (player) => player.letter
         )}`
       );
     });
@@ -175,7 +175,7 @@ module.exports = class ConnectionManager {
 
     // убрать занятые имена из пула доступных имен
     players.forEach((player) => {
-      const index = avalivableLetters.indexOf(player.name);
+      const index = avalivableLetters.indexOf(player.letter);
       if (index > -1) {
         avalivableLetters.splice(index, 1);
       }

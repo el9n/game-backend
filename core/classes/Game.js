@@ -7,9 +7,12 @@ module.exports = class Game {
 
     this.cm.onRoomEvent(this.cm.mainRoom, "join", (room, id) => {
       const user = this.cm.getUserById(id);
+
+      // отправить пользователю вопросы
       this.#stateSensetiveFactory(() =>
         user.emit("questions", this.game.questions)
       );
+      // отправить пользователю историю
       this.#stateSensetiveFactory(() =>
         user.emit("history", this.game.history)
       );
@@ -27,6 +30,13 @@ module.exports = class Game {
             questionIndex,
             successful,
           });
+        });
+      });
+
+      // пользователь захватил клетку
+      user.on("capture", ({ cell }) => {
+        this.#stateSensetiveFactory(() => {
+          this.game.action("capture", user.letter, { cell });
         });
       });
     });

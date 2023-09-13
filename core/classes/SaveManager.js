@@ -38,6 +38,10 @@ module.exports = class SaveManager extends EventEmitter {
         this.#data.history.push(new Action(type, user, options));
         break;
       }
+      case "capture": {
+        this.#data.history.push(new Action(type, user, options));
+        break;
+      }
       default:
         return;
     }
